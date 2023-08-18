@@ -12,23 +12,18 @@ const char fw_ver[] = "1.0.7";
 ThingsboardOTA ota;
 const char* ThingsboardOTA::_current_fw_version = fw_ver;
 
-const int pin = 34;
-
 void InitWiFi();
 bool reconnect();
 
 void setup()
 {
     Serial.begin(115200);
-    pinMode(pin, INPUT_PULLDOWN);
     delay(1000);
     InitWiFi();
 }
 
 void loop()
 {
-    // Serial.println("ini firmware TEST 1.0.6!!");
-    // Serial.printf("digitalRead pin: %d\n", digitalRead(pin));
     delay(1000);
     Serial.println("ini firmware TEST " + String(fw_ver));
 

@@ -41,6 +41,7 @@ public:
     static void progressCallback(const uint32_t &currentChunk, const uint32_t &totalChuncks);
 
     bool reconnect();
+    bool do_update();
     void loop();
 };
 
@@ -106,6 +107,11 @@ bool ThingsboardOTA::reconnect()
         }
     }
     return true;
+}
+
+bool ThingsboardOTA::do_update()
+{
+    return !updateRequestSent;
 }
 
 void ThingsboardOTA::loop()
