@@ -15,9 +15,12 @@ const char* ThingsboardOTA::_current_fw_version = fw_ver;
 void InitWiFi();
 bool reconnect();
 
+const uint8_t pin = 34;
+
 void setup()
 {
     Serial.begin(115200);
+    pinMode(pin, INPUT_PULLDOWN);
     delay(1000);
     InitWiFi();
 }
@@ -26,6 +29,10 @@ void loop()
 {
     delay(1000);
     Serial.println("ini firmware TEST " + String(fw_ver));
+    bool pinState = digitalRead(pin);
+    // Serial.printf("pinState: %d\n", pinState);
+
+    if (pinState) ota.do_update();
 
     if (!reconnect()) return;
 
