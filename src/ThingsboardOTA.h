@@ -111,11 +111,14 @@ bool ThingsboardOTA::reconnect()
 
 bool ThingsboardOTA::do_update()
 {
-    return !updateRequestSent;
+    updateRequestSent = false;
+    return true;
 }
 
 void ThingsboardOTA::loop()
 {
+    Serial.printf("updateRequestSent : %d\n", updateRequestSent);
+    
     if (!currentFWSent)
     {
         currentFWSent = tb.Firmware_Send_Info(CURRENT_FIRMWARE_TITLE, ThingsboardOTA::_current_fw_version) && tb.Firmware_Send_State(FW_STATE_UPDATED);
